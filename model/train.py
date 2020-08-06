@@ -1,6 +1,15 @@
 from melanoma_classification.model.model import model
-from melanoma_classification.model.data_generator import dataGenerator
-from melanoma_classification.model.constants import steps_per_epoch, epochs
+from melanoma_classification.model.data_generator import DataGenerator
+from melanoma_classification.model.constants import steps_per_epoch, epochs, batch_size
 
-gen = dataGenerator()
-model.fit(gen, epochs=epochs, steps_per_epoch=steps_per_epoch)
+dataGenerator = DataGenerator()
+validation_data = dataGenerator.getValidationSet()
+gen = dataGenerator.getTrainingDataGenerator()
+
+model.fit(
+  gen,
+  epochs=epochs,
+  steps_per_epoch=steps_per_epoch,
+  validation_data=validation_data,
+  validation_batch_size=batch_size
+)
