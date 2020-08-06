@@ -1,18 +1,15 @@
-from keras.applications.vgg16 import VGG16
-from keras.preprocessing import image
-from keras.applications.vgg16 import preprocess_input
-from keras.layers import Input, Flatten, Dense
-from keras.models import Model
-from keras.optimizers import Adam
-import numpy as np
+from tensorflow.python.keras.applications.efficientnet import EfficientNetB4, preprocess_input
+from tensorflow.keras.layers import Flatten, Dense, Lambda
+from tensorflow.keras import Sequential
+from tensorflow.keras.optimizers import Adam
 
-input = Input(shape=(224, 224, 3), name='image_input')
+model = Sequential()
+model.add(Lambda(preprocess_input, name="preprocess", input_shape=(224, 224, 3)))
+model.add(EfficientNetB4(weights='imagenet', include_top=False))
+model.add(Flatten(name='flatten'))
+model.add(Dense(256, activation='relu', name='relu1'))
+model.add(Dense(2, activation='softmax', name='predictions'))
 
-x = VGG16(weights='imagenet', include_top=False)(input)
-x = Flatten(name='flatten')(x)
-x = Dense(256, activation='relu', name='fc1')(x)
-output = Dense(2, activation='softmax', name='predictions')(x)
+optimizer = Adam(learning_rate=1e-4)
 
-model = Model(inputs=input, outputs=output)
-optimizer = Adam(learning_rate=0.0001)
-model.compile(optimizer=optimizer, loss="categorical_crossentropy")
+model.compile(optimizer=optimizer, loss='bce')

@@ -7,4 +7,4 @@ batch_size = 10
 
 steps_per_epoch = 1
 test_half_size = positives - train_half_size
-epochs = train_half_size * 2 / batch_size
+epochs = train_half_size * 2 // batch_size
