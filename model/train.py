@@ -1,4 +1,4 @@
-from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, ReduceLROnPlateau
+from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint
 
 from melanoma_classification.model.model import model
 from melanoma_classification.model.data_generator.training_generator import DataGenerator
@@ -16,7 +16,6 @@ model_checkpoint = ModelCheckpoint(
   mode='min',
   save_best_only=True,
 )
-reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=1e-6)
 
 model.fit(
   gen,
@@ -24,5 +23,5 @@ model.fit(
   steps_per_epoch=steps_per_epoch,
   validation_data=validation_data,
   validation_batch_size=batch_size,
-  callbacks=[csv_logger, model_checkpoint, reduce_lr],
+  callbacks=[csv_logger, model_checkpoint],
 )

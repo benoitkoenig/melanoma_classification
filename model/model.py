@@ -10,6 +10,6 @@ model.add(Flatten(name='flatten'))
 model.add(Dense(256, activation='relu', name='relu1'))
 model.add(Dense(2, activation='softmax', name='predictions'))
 
-optimizer = Adam(learning_rate=5e-6)
+optimizer = Adam(learning_rate=1e-5)
 
 model.compile(optimizer=optimizer, loss='bce', metrics=['accuracy'])
