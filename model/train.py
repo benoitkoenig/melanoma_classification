@@ -1,7 +1,7 @@
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, ReduceLROnPlateau
 
 from melanoma_classification.model.model import model
-from melanoma_classification.model.data_generator import DataGenerator
+from melanoma_classification.model.data_generator.training_generator import DataGenerator
 from melanoma_classification.model.constants import steps_per_epoch, epochs, batch_size
 
 dataGenerator = DataGenerator()
