@@ -13,8 +13,8 @@ def generateBalancedRows(negatives, positives):
   random.shuffle(balancedRows)
   return balancedRows
 
-def getX(row):
-  dicomData = pydicom.read_file('data/train/%s.dcm' % row[0])
+def getX(row, folder='train'):
+  dicomData = pydicom.read_file('data/%s/%s.dcm' % (folder, row[0]))
   pixelArray = dicomData.pixel_array
   X = tf.convert_to_tensor(pixelArray)
   X = tf.image.resize(X, (224, 224))
