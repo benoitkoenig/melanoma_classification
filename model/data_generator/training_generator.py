@@ -37,6 +37,6 @@ class DataGenerator:
   def getTrainingDataGenerator(self):
     rowsLeft = generateBalancedRows(self.negativesTrain, self.positivesTrain)
     while len(rowsLeft) != 0:
-      X, Y = getXY(rowsLeft[:batch_size])
+      X, Y = getXY(rowsLeft[:batch_size], shouldUseDataAugmentation=True)
       rowsLeft = rowsLeft[batch_size:]
       yield X, Y
