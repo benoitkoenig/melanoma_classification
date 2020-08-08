@@ -1,0 +1,4 @@
+matplotlib
+pydicom
+tensorflow
+tensorflow_addons
