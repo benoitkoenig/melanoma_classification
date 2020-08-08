@@ -2,7 +2,7 @@ total_train_rows = 33126
 positives=584
 negatives=32542
 
-test_half_size = 24
+test_half_size = 44
 batch_size = 10
 epochs = 10
 
